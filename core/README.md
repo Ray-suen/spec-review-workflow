@@ -5,6 +5,42 @@ This setup is a main-session OpenSpec workflow.
 The current chat session does the work phase by phase.
 It supports both `test-first` and `implementation-first`.
 
+## Flowchart
+
+```mermaid
+flowchart TD
+    START([Start a request<br>Discuss scope first]) --> PRD
+
+    PRD[/"Lightweight PRD<br>Only when repo is empty or unclear"/] --> SPEC
+    SPEC["OpenSpec change<br>Define scope and acceptance"] --> REVIEW1
+
+    REVIEW1{{"Phase review<br>Approve before implementation"}}
+    REVIEW1 -->|approved| STRATEGY
+    REVIEW1 -->|needs changes| PRD
+
+    STRATEGY[/"Choose strategy<br>test-first or implementation-first"/] --> WORK
+    WORK["Work phase<br>Only one phase at a time"] --> REVIEW2
+
+    REVIEW2{{"Phase review<br>Check the result"}}
+    REVIEW2 -->|tests / implementation done| TESTS
+    REVIEW2 -->|needs changes| WORK
+
+    TESTS["Run tests / verification"] --> COMMIT
+    COMMIT["Draft commit message<br>Wait for approval"] --> REVIEW3
+
+    REVIEW3{{"Code review<br>Final checkpoint before merge"}}
+    REVIEW3 -->|approved| MERGE["Merge branch"]
+    REVIEW3 -->|changes requested| WORK
+
+    style PRD fill:#4361ee,stroke:#3451ce,color:#fff
+    style SPEC fill:#6c5ce7,stroke:#5a4bd1,color:#fff
+    style STRATEGY fill:#2d9c2d,stroke:#228B22,color:#fff
+    style WORK fill:#4361ee,stroke:#3451ce,color:#fff
+    style TESTS fill:#a0a0a0,stroke:#888,color:#fff
+    style COMMIT fill:#ff8c00,stroke:#e07b00,color:#fff
+    style MERGE fill:#2d9c2d,stroke:#228B22,color:#fff
+```
+
 ## Intended usage
 
 In a project session, say something like:
