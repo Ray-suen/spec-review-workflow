@@ -67,7 +67,7 @@ In a project session, say something like:
 
 ## Lightweight PRD
 
-See [references/prd_template.md](references/prd_template.md).
+See [core/references/prd_template.md](core/references/prd_template.md).
 
 ## Development strategy
 
@@ -91,7 +91,7 @@ If the GitLab repo does not exist yet, the agent should ask for or infer the tar
 
 ## Phase rules
 
-See [references/review_checklist.md](references/review_checklist.md) and [references/python_env.md](references/python_env.md).
+See [core/references/review_checklist.md](core/references/review_checklist.md) and [core/references/python_env.md](core/references/python_env.md).
 
 ## OpenSpec Gate
 
