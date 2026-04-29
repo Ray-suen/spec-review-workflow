@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec Review Workflow"
+  short_description: "Run the main-session spec review workflow"
+  default_prompt: "Ask for spec-review-workflow and describe the feature request; the current session will discuss OpenSpec, write tests, write implementation, run tests, and commit."
