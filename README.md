@@ -20,7 +20,7 @@ flowchart TD
     REVIEW1{{"Phase review"}}
     REVIEW1 -->|approved| WORK
     REVIEW1 -->|needs changes| SPEC
-    WORK["Work phase<br>(test-first or implementation-first)<br>Stop for phase review after each phase"] --> REVIEW2
+    WORK["Work phase<br>(test-first or implementation-first)"] --> REVIEW2
 
     REVIEW2{{"Phase review"}}
     REVIEW2 -->|done| VERIFY
