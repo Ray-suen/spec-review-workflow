@@ -64,13 +64,12 @@ In a project session, say something like:
 
 Edit this source repo first.
 
-- Core changes go in `core/`
 - Codex changes go in `codex/`
-- Later Claude changes go in `claude/`
+- Claude changes go in `claude/`
 
-The Claude entry should live under `claude/CLAUDE.md` and `claude/.claude/commands/`.
-
-After editing here, sync the relevant entry back to the installed skill path under `~/.codex/skills/`.
+After editing, sync to the installed paths:
+- `codex/<skill>/` -> `~/.codex/skills/<skill>/`
+- `claude/commands/<skill>.md` -> `~/.claude/commands/<skill>.md`
 
 ## Workflow
 
@@ -91,7 +90,7 @@ After editing here, sync the relevant entry back to the installed skill path und
 
 ## Lightweight PRD
 
-See [core/references/prd_template.md](core/references/prd_template.md).
+See [codex/spec-review-workflow/references/prd_template.md](codex/spec-review-workflow/references/prd_template.md).
 
 ## Development strategy
 
@@ -115,7 +114,7 @@ If the GitLab repo does not exist yet, the agent should ask for or infer the tar
 
 ## Phase rules
 
-See [core/references/review_checklist.md](core/references/review_checklist.md) and [core/references/python_env.md](core/references/python_env.md).
+See [codex/spec-review-workflow/references/review_checklist.md](codex/spec-review-workflow/references/review_checklist.md) and [codex/spec-review-workflow/references/python_env.md](codex/spec-review-workflow/references/python_env.md).
 
 ## OpenSpec Gate
 

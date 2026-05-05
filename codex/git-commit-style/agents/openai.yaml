@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Commit Style"
+  short_description: "Draft commit messages and wait for approval"
+  default_prompt: "Use git-commit-style to draft a commit message, show it with the files to include, and wait for approval before running git commit."
