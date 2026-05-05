@@ -17,25 +17,22 @@ flowchart TD
     PRD[/"Lightweight PRD"/] --> SPEC
     SPEC["OpenSpec change<br>Define scope and acceptance"] --> REVIEW1
 
-    REVIEW1{{"Phase review<br>Approve before implementation"}}
+    REVIEW1{{"Phase review"}}
     REVIEW1 -->|approved| STRATEGY
     REVIEW1 -->|needs changes| SPEC
 
     STRATEGY[/"Choose strategy<br>test-first or implementation-first"/] --> WORK
-    WORK["Work phase<br>Only one phase at a time"] --> REVIEW2
+    WORK["Work phase<br>(test-first or implementation-first)<br>Stop for phase review after each phase"] --> REVIEW2
 
-    REVIEW2{{"Phase review<br>Check the result"}}
-    REVIEW2 -->|done| TESTS
+    REVIEW2{{"Phase review"}}
+    REVIEW2 -->|done| VERIFY
     REVIEW2 -->|needs changes| WORK
 
-    TESTS["Run tests / verification"] --> REVIEW3
+    VERIFY["Run tests / verification"] --> CODE_REVIEW
 
-    REVIEW3{{"Approve code review start"}}
-    REVIEW3 -->|approved| REVIEW4
-
-    REVIEW4{{"Code review<br>Final checkpoint before merge"}}
-    REVIEW4 -->|approved| COMMIT
-    REVIEW4 -->|needs changes| WORK
+    CODE_REVIEW{{"Code review<br>Final checkpoint before merge"}}
+    CODE_REVIEW -->|approved| COMMIT
+    CODE_REVIEW -->|needs changes| WORK
 
     COMMIT["Draft commit message<br>Wait for approval"] --> MERGE["Merge branch"]
     MERGE --> ARCHIVE["Archive OpenSpec change"]
@@ -44,7 +41,7 @@ flowchart TD
     style SPEC fill:#6c5ce7,stroke:#5a4bd1,color:#fff
     style STRATEGY fill:#2d9c2d,stroke:#228B22,color:#fff
     style WORK fill:#4361ee,stroke:#3451ce,color:#fff
-    style TESTS fill:#a0a0a0,stroke:#888,color:#fff
+    style VERIFY fill:#a0a0a0,stroke:#888,color:#fff
     style COMMIT fill:#ff8c00,stroke:#e07b00,color:#fff
     style MERGE fill:#2d9c2d,stroke:#228B22,color:#fff
     style ARCHIVE fill:#8e44ad,stroke:#70368a,color:#fff
