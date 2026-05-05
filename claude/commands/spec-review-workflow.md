@@ -27,7 +27,20 @@ Use this command to run the current session through the spec review workflow.
 
 Use this phase when starting from an empty repo, a repo without clear app structure, or a request that is too broad to spec safely.
 
-Ask the needed questions in one batch. Use `references/prd_template.md` for the fields and output shape if available.
+Ask the needed questions in one batch using these fields:
+
+- Problem / goal: what problem the project solves and what outcome is desired
+- Target users: who will use it and in what context
+- Core user flows: the main user actions from start to finish
+- MVP scope: what the first version must include
+- MVP non-goals: what the first version explicitly will not include
+- Functional requirements: concrete capabilities and rules
+- UX constraints, if relevant: layout, interaction, responsive, accessibility, and visual expectations
+- Data and persistence needs: what data exists and where/how it is stored
+- Auth / permissions needs: login, roles, ownership, and access control
+- External integrations: third-party services, APIs, payments, email, OAuth, or none
+- Acceptance criteria: observable conditions that define done
+- Open questions: unresolved decisions that need user input
 
 After the user answers, summarize the Lightweight PRD and write it to `docs/prd.md`.
 Create OpenSpec files only after the user approves `docs/prd.md`.
@@ -73,7 +86,22 @@ Create OpenSpec files only after the user approves `docs/prd.md`.
 
 ## Review Level
 
-Use `references/review_checklist.md` for code review if available.
+Use this checklist for code review.
+
+**Basic Sanity Check** (every change):
+- Changed files match the request.
+- Unrelated changes are excluded.
+- Syntax, build, or test status is reasonable for the repo.
+- The main affected flow still works at a basic level.
+- No secrets or local-only paths are included.
+
+**Full Self-Review** (auth, permissions, API behavior, validation, data persistence, migrations, payment, security, shared utilities, multi-module changes, significantly changed tests, or when the user asks):
+- Requirements and acceptance criteria are covered.
+- Edge cases and failure paths are handled.
+- Tests cover the important behavior.
+- The implementation is not overbuilt.
+- No unrelated files were changed.
+- The diff is coherent and ready for the next step.
 
 - Phase review happens after each phase to confirm direction before continuing.
 - Code review starts only after the user explicitly approves starting it.
