@@ -60,12 +60,13 @@ Create OpenSpec files only after the user approves `docs/prd.md`.
 
 ## Strategy
 
-- Use `test-first` for API, auth, validation, business logic, data transformation, parser/formatter work, and bug fixes.
-- Use `implementation-first` for UI, prototype, visual polish, exploratory work, external integrations, and one-off tools.
+Default to `test-first`. Use `implementation-first` only when test-first is not applicable.
+
+- `test-first`: API, auth, validation, business logic, data transformation, parser/formatter, bug fixes, and UI logic (state, data flow, interaction behavior).
+- `implementation-first`: UI visual work only (colors, spacing, animation feel) — where no mechanical success criterion can be defined before seeing the result.
 - Always tell the user which strategy was selected and why.
-- If the task is ambiguous or mixed, propose the strategy split and wait for user confirmation.
 - If the user specifies a strategy, follow it.
-- If the feature is mixed, split the work: test-first for stable logic, implementation-first for exploratory or visual parts.
+- For mixed work, split: test-first for logic, implementation-first for visual parts.
 
 ## Branch Scope
 
