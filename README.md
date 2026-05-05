@@ -18,10 +18,8 @@ flowchart TD
     SPEC["OpenSpec change<br>Define scope and acceptance"] --> REVIEW1
 
     REVIEW1{{"Phase review"}}
-    REVIEW1 -->|approved| STRATEGY
+    REVIEW1 -->|approved| WORK
     REVIEW1 -->|needs changes| SPEC
-
-    STRATEGY[/"test-first (default)"/] --> WORK
     WORK["Work phase<br>(test-first or implementation-first)<br>Stop for phase review after each phase"] --> REVIEW2
 
     REVIEW2{{"Phase review"}}
@@ -39,7 +37,6 @@ flowchart TD
 
     style PRD fill:#4361ee,stroke:#3451ce,color:#fff
     style SPEC fill:#6c5ce7,stroke:#5a4bd1,color:#fff
-    style STRATEGY fill:#2d9c2d,stroke:#228B22,color:#fff
     style WORK fill:#4361ee,stroke:#3451ce,color:#fff
     style VERIFY fill:#a0a0a0,stroke:#888,color:#fff
     style COMMIT fill:#ff8c00,stroke:#e07b00,color:#fff
