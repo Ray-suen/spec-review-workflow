@@ -21,10 +21,12 @@ Use this when the user wants a main-session OpenSpec workflow with code review c
 10. For `test-first`, write tests only, stop for phase review, then write implementation only.
 11. For `implementation-first`, write implementation only, stop for phase review, then write behavior-focused tests.
 12. Stop for phase review after each phase.
-13. After tests pass, use `git-commit-style` to draft a commit.
-14. Show the commit draft and files; commit only after approval.
-15. Run code review as the final checkpoint before merge.
-16. Only after code review is approved, merge the branch.
+13. Stop and ask for approval before starting code review.
+14. Run code review as the final checkpoint before merge.
+15. After code review is approved, use `git-commit-style` to draft a commit.
+16. Show the commit draft and files; commit only after approval.
+17. Only after code review is approved, merge the branch.
+18. After merge, archive the OpenSpec change.
 
 ## Lightweight PRD
 
@@ -46,10 +48,18 @@ Create OpenSpec files only after the user approves `docs/prd.md`.
 
 ## OpenSpec Gate
 
-- When this workflow is active, OpenSpec is required before tests or implementation.
-- Do not skip OpenSpec because the request is small.
+- When this workflow is active, OpenSpec must exist before any non-trivial tests or implementation.
+- Do not start implementation first and then backfill OpenSpec later.
+- Do not skip OpenSpec because the request is small if the change alters behavior, touches multiple files, or expands scope.
+- If the scope grows while working, stop and create or update OpenSpec before continuing.
 - OpenSpec may be skipped only when the repo is an existing project, the change is trivial, the change does not alter behavior, and the user explicitly approves skipping OpenSpec.
 - If OpenSpec is skipped, state why before editing files.
+
+## OpenSpec Archive
+
+- After the branch is merged, move the completed OpenSpec change into `openspec/archive/<change-id>/` or the repo's equivalent archive location.
+- Do not archive before merge.
+- If the repo does not yet have an archive location, create one and use it consistently.
 
 ## Strategy
 
@@ -89,7 +99,9 @@ Create OpenSpec files only after the user approves `docs/prd.md`.
 Use [references/review_checklist.md](references/review_checklist.md) for code review.
 
 - Phase review happens after each phase to confirm direction before continuing.
+- Code review starts only after the user explicitly approves starting it.
 - Code review is the final checkpoint before merge.
+- If merge is requested before code review is complete, stop and run code review first.
 - Do not merge until code review is explicitly approved.
 - Do not treat a quick code skim or test run as code review.
 

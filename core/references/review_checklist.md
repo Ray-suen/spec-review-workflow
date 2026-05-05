@@ -1,5 +1,7 @@
 # Review Checklist
 
+If merge is requested before code review is complete, stop and run this checklist first.
+
 ## Basic Sanity Check
 
 Use this for every change.

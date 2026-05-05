@@ -9,28 +9,36 @@ It supports both `test-first` and `implementation-first`.
 
 ```mermaid
 flowchart TD
-    START([Start a request<br>Discuss scope first]) --> PRD
+    START([Start a request<br>Discuss scope first]) --> NEED_PRD{Repo empty<br>or unclear?}
 
-    PRD[/"Lightweight PRD<br>Only when repo is empty or unclear"/] --> SPEC
+    NEED_PRD -->|yes| PRD
+    NEED_PRD -->|no| SPEC
+
+    PRD[/"Lightweight PRD"/] --> SPEC
     SPEC["OpenSpec change<br>Define scope and acceptance"] --> REVIEW1
 
     REVIEW1{{"Phase review<br>Approve before implementation"}}
     REVIEW1 -->|approved| STRATEGY
-    REVIEW1 -->|needs changes| PRD
+    REVIEW1 -->|needs changes| SPEC
 
     STRATEGY[/"Choose strategy<br>test-first or implementation-first"/] --> WORK
     WORK["Work phase<br>Only one phase at a time"] --> REVIEW2
 
     REVIEW2{{"Phase review<br>Check the result"}}
-    REVIEW2 -->|tests / implementation done| TESTS
+    REVIEW2 -->|done| TESTS
     REVIEW2 -->|needs changes| WORK
 
-    TESTS["Run tests / verification"] --> COMMIT
-    COMMIT["Draft commit message<br>Wait for approval"] --> REVIEW3
+    TESTS["Run tests / verification"] --> REVIEW3
 
-    REVIEW3{{"Code review<br>Final checkpoint before merge"}}
-    REVIEW3 -->|approved| MERGE["Merge branch"]
-    REVIEW3 -->|changes requested| WORK
+    REVIEW3{{"Approve code review start"}}
+    REVIEW3 -->|approved| REVIEW4
+
+    REVIEW4{{"Code review<br>Final checkpoint before merge"}}
+    REVIEW4 -->|approved| COMMIT
+    REVIEW4 -->|needs changes| WORK
+
+    COMMIT["Draft commit message<br>Wait for approval"] --> MERGE["Merge branch"]
+    MERGE --> ARCHIVE["Archive OpenSpec change"]
 
     style PRD fill:#4361ee,stroke:#3451ce,color:#fff
     style SPEC fill:#6c5ce7,stroke:#5a4bd1,color:#fff
@@ -39,6 +47,7 @@ flowchart TD
     style TESTS fill:#a0a0a0,stroke:#888,color:#fff
     style COMMIT fill:#ff8c00,stroke:#e07b00,color:#fff
     style MERGE fill:#2d9c2d,stroke:#228B22,color:#fff
+    style ARCHIVE fill:#8e44ad,stroke:#70368a,color:#fff
 ```
 
 ## Intended usage
@@ -51,6 +60,18 @@ In a project session, say something like:
 每個階段結束都停下來讓我審查。
 ```
 
+## How To Edit
+
+Edit this source repo first.
+
+- Core changes go in `core/`
+- Codex changes go in `codex/`
+- Later Claude changes go in `claude/`
+
+The Claude entry should live under `claude/CLAUDE.md` and `claude/.claude/commands/`.
+
+After editing here, sync the relevant entry back to the installed skill path under `~/.codex/skills/`.
+
 ## Workflow
 
 1. Main session discusses the request.
@@ -62,8 +83,11 @@ In a project session, say something like:
 7. The session runs tests.
 8. The session drafts the commit message with `git-commit-style`.
 9. The session shows the draft and files, then waits for approval before commit.
-10. The session runs code review as the final checkpoint before merge.
-11. Only after code review approval, the session merges the branch.
+10. The session stops and asks for approval before starting code review.
+11. The session runs code review as the final checkpoint before merge.
+12. If merge is requested before code review is complete, the session stops and runs code review first.
+13. Only after code review approval, the session merges the branch.
+14. After merge, the session archives the OpenSpec change.
 
 ## Lightweight PRD
 
@@ -95,7 +119,15 @@ See [core/references/review_checklist.md](core/references/review_checklist.md) a
 
 ## OpenSpec Gate
 
-When this workflow is active, OpenSpec is required before tests or implementation unless you explicitly approve skipping it for a trivial existing-project change.
+When this workflow is active, OpenSpec must exist before any non-trivial tests or implementation.
+Do not start implementation first and then backfill OpenSpec later.
+If the scope grows while working, stop and create or update OpenSpec before continuing.
+OpenSpec may be skipped only for a trivial existing-project change that does not alter behavior and only if you explicitly approve skipping it.
+
+## OpenSpec Archive
+
+After merge, archive the completed OpenSpec change into `openspec/archive/<change-id>/` or the repo's equivalent archive location.
+Do not archive before merge.
 
 ## PRD Gate
 
@@ -107,7 +139,7 @@ If the repo is empty, the agent should ask whether it should stay local or be li
 
 Code review here means the local checklist-based check for logic, safety, edge cases, test coverage, and scope. It is not the same as an external PR review.
 
-Code review is the final checkpoint before merge. Do not merge until code review is explicitly approved. Do not treat a quick code skim or a test run as code review.
+Code review starts only after you explicitly approve starting it. It is the final checkpoint before merge. If merge is requested before code review is complete, the session must stop and run code review first. Do not merge until code review is explicitly approved. Do not treat a quick code skim or a test run as code review.
 
 ## Phase Review
 
