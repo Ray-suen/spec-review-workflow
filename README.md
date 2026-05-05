@@ -21,7 +21,7 @@ flowchart TD
     REVIEW1 -->|approved| STRATEGY
     REVIEW1 -->|needs changes| SPEC
 
-    STRATEGY[/"Choose strategy<br>test-first or implementation-first"/] --> WORK
+    STRATEGY[/"test-first (default)"/] --> WORK
     WORK["Work phase<br>(test-first or implementation-first)<br>Stop for phase review after each phase"] --> REVIEW2
 
     REVIEW2{{"Phase review"}}
