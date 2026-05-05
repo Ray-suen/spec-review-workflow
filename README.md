@@ -9,18 +9,19 @@ It supports both `test-first` and `implementation-first`.
 
 ```mermaid
 flowchart TD
-    START([Start a request<br>Discuss scope first]) --> NEED_PRD{Repo empty<br>or unclear?}
+    START([Start · discuss scope first]) --> NEED_PRD{Repo empty<br>or unclear?}
 
     NEED_PRD -->|yes| PRD
     NEED_PRD -->|no| SPEC
 
     PRD[/"Lightweight PRD"/] --> SPEC
-    SPEC["OpenSpec change<br>Define scope and acceptance"] --> REVIEW1
+    SPEC["OpenSpec · define scope and acceptance"] --> REVIEW1
 
-    REVIEW1{{"Phase review"}}
+    REVIEW1{{"Spec review"}}
     REVIEW1 -->|approved| WORK
     REVIEW1 -->|needs changes| SPEC
-    WORK["Work phase<br>(test-first or implementation-first)"] --> REVIEW2
+
+    WORK["Work phase · test-first"] --> REVIEW2
 
     REVIEW2{{"Phase review"}}
     REVIEW2 -->|done| VERIFY
@@ -28,20 +29,30 @@ flowchart TD
 
     VERIFY["Run tests / verification"] --> CODE_REVIEW
 
-    CODE_REVIEW{{"Code review<br>Final checkpoint before merge"}}
+    CODE_REVIEW{{"Code review"}}
     CODE_REVIEW -->|approved| COMMIT
     CODE_REVIEW -->|needs changes| WORK
 
-    COMMIT["Draft commit message<br>Wait for approval"] --> MERGE["Merge branch"]
-    MERGE --> ARCHIVE["Archive OpenSpec change"]
+    COMMIT["Draft commit · wait for approval"] --> MERGE["Merge"]
+    MERGE --> ARCHIVE["Archive OpenSpec"]
 
-    style PRD fill:#4361ee,stroke:#3451ce,color:#fff
-    style SPEC fill:#6c5ce7,stroke:#5a4bd1,color:#fff
-    style WORK fill:#4361ee,stroke:#3451ce,color:#fff
-    style VERIFY fill:#a0a0a0,stroke:#888,color:#fff
-    style COMMIT fill:#ff8c00,stroke:#e07b00,color:#fff
-    style MERGE fill:#2d9c2d,stroke:#228B22,color:#fff
-    style ARCHIVE fill:#8e44ad,stroke:#70368a,color:#fff
+    classDef start fill:#2d3436,stroke:#1e2527,color:#fff
+    classDef plan fill:#6c5ce7,stroke:#5a4bd1,color:#fff
+    classDef work fill:#4361ee,stroke:#3451ce,color:#fff
+    classDef review fill:#e17055,stroke:#c0604f,color:#fff
+    classDef verify fill:#636e72,stroke:#4f595c,color:#fff
+    classDef commit fill:#ff8c00,stroke:#e07b00,color:#fff
+    classDef done fill:#00b894,stroke:#009975,color:#fff
+    classDef archive fill:#8e44ad,stroke:#70368a,color:#fff
+
+    class START start
+    class PRD,SPEC plan
+    class WORK work
+    class REVIEW1,REVIEW2,CODE_REVIEW review
+    class VERIFY verify
+    class COMMIT commit
+    class MERGE done
+    class ARCHIVE archive
 ```
 
 ## Intended usage
