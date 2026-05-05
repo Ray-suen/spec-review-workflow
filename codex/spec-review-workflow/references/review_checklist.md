@@ -25,3 +25,34 @@ Check:
 - The implementation is not overbuilt.
 - No unrelated files were changed.
 - The diff is coherent and ready for the next step.
+
+## Security
+
+Check when the change touches auth, permissions, user input, data storage, or external APIs.
+
+- No SQL injection, XSS, or CSRF vulnerabilities introduced.
+- Authorization checks are in place — one user cannot access another user's data.
+- Sensitive data (passwords, tokens, PII) is not logged or exposed in responses.
+
+## Breaking Changes
+
+Check when the change modifies existing APIs, DB schema, or shared interfaces.
+
+- Existing API contracts are not broken for current clients.
+- DB migrations are safe to run without locking tables or dropping data.
+- Backward-incompatible changes are intentional and communicated.
+
+## Performance
+
+Check when the change touches database queries, loops over large datasets, or hot paths.
+
+- No N+1 queries introduced.
+- No unnecessary repeated computation inside loops.
+- Large dataset scenarios have been considered.
+
+## Observability
+
+Check when the change introduces new operations, error paths, or integrations.
+
+- Important operations and state changes are logged.
+- Errors are recorded with enough context to debug.
