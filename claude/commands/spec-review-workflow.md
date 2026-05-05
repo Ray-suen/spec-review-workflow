@@ -1,6 +1,6 @@
 # spec-review-workflow
 
-Use this command to run the current session through the spec review workflow.
+Use this command when the user wants the current main session to run an OpenSpec -> implementation/tests -> verification -> commit workflow with manual code review after each phase. Supports test-first and implementation-first.
 
 ## Workflow
 
@@ -27,23 +27,12 @@ Use this command to run the current session through the spec review workflow.
 
 Use this phase when starting from an empty repo, a repo without clear app structure, or a request that is too broad to spec safely.
 
-Ask the needed questions in one batch using these fields:
-
-- Problem / goal: what problem the project solves and what outcome is desired
-- Target users: who will use it and in what context
-- Core user flows: the main user actions from start to finish
-- MVP scope: what the first version must include
-- MVP non-goals: what the first version explicitly will not include
-- Functional requirements: concrete capabilities and rules
-- UX constraints, if relevant: layout, interaction, responsive, accessibility, and visual expectations
-- Data and persistence needs: what data exists and where/how it is stored
-- Auth / permissions needs: login, roles, ownership, and access control
-- External integrations: third-party services, APIs, payments, email, OAuth, or none
-- Acceptance criteria: observable conditions that define done
-- Open questions: unresolved decisions that need user input
+Ask the needed questions in one batch. Use the template below for the fields and output shape.
 
 After the user answers, summarize the Lightweight PRD and write it to `docs/prd.md`.
 Create OpenSpec files only after the user approves `docs/prd.md`.
+
+@.claude/references/prd_template.md
 
 ## PRD Gate
 
@@ -84,24 +73,15 @@ Create OpenSpec files only after the user approves `docs/prd.md`.
 - Split branches only when changes are unrelated or should ship separately.
 - Tiny low-risk edits do not need a new branch unless the user wants isolation.
 
+## Git Remote and SSH
+
+@.claude/references/git_remote.md
+
 ## Review Level
 
-Use this checklist for code review.
+Use the checklist below for code review.
 
-**Basic Sanity Check** (every change):
-- Changed files match the request.
-- Unrelated changes are excluded.
-- Syntax, build, or test status is reasonable for the repo.
-- The main affected flow still works at a basic level.
-- No secrets or local-only paths are included.
-
-**Full Self-Review** (auth, permissions, API behavior, validation, data persistence, migrations, payment, security, shared utilities, multi-module changes, significantly changed tests, or when the user asks):
-- Requirements and acceptance criteria are covered.
-- Edge cases and failure paths are handled.
-- Tests cover the important behavior.
-- The implementation is not overbuilt.
-- No unrelated files were changed.
-- The diff is coherent and ready for the next step.
+@.claude/references/review_checklist.md
 
 - Phase review happens after each phase to confirm direction before continuing.
 - Code review starts only after the user explicitly approves starting it.
@@ -109,6 +89,18 @@ Use this checklist for code review.
 - If merge is requested before code review is complete, stop and run code review first.
 - Do not merge until code review is explicitly approved.
 - Do not treat a quick code skim or test run as code review.
+
+## Python Environment
+
+@.claude/references/python_env.md
+
+## Coding Guidelines
+
+@.claude/commands/karpathy-guidelines.md
+
+## Commit Style
+
+@.claude/commands/git-commit-style.md
 
 ## Rules
 
