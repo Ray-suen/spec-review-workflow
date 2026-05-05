@@ -67,9 +67,9 @@ Edit this source repo first.
 - Codex changes go in `codex/`
 - Claude changes go in `claude/`
 
-After editing, sync to the installed paths:
-- `codex/<skill>/` -> `~/.codex/skills/<skill>/`
-- `claude/commands/<skill>.md` -> `~/.claude/commands/<skill>.md`
+After editing, run `./sync.sh` to copy everything to:
+- `~/.codex/skills/<skill>/` for Codex
+- `~/.claude/commands/` and `~/.claude/references/` for Claude
 
 ## Workflow
 
